@@ -2,6 +2,10 @@
 const api_url = "https://fsa-crud-2aa9294fe819.herokuapp.com/api/2109-CPU-RM-WEB-PT/artists";
 
 const images = [];
+const thumbnailContainer = document.getElementById('image-container');
+
+//elements
+
  
 // Defining async function
 async function getapi(url) {
@@ -40,7 +44,6 @@ function loadImages(inData){
 function renderImages(){
 
     //this is where the image and name will be placed
-    const thumbnailContainer = document.getElementById('image-container');
 
     images.forEach(item => {
 
@@ -54,12 +57,18 @@ function renderImages(){
         console.log("name " + item.artistName);
 
         //create a div and place inside thumbnail container
-        const itemContainer = document.createElement('div');
-        itemContainer.appendChild(artistNameElement);
-        itemContainer.appendChild(imageElement);
-        thumbnailContainer.appendChild(itemContainer);
+        const clickableItemContainer = document.createElement('div');
+        clickableItemContainer.appendChild(artistNameElement);
+        clickableItemContainer.appendChild(imageElement);
+        thumbnailContainer.appendChild(clickableItemContainer);
+
+        clickableItemContainer.addEventListener("click", () => {
+            alert(`You clicked on ${item.artistName}`);
+        });
     })
 }
+
+
 
 
 getapi(api_url);
